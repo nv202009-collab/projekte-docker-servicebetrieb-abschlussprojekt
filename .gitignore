@@ -1,0 +1,21 @@
+# Vertrauliche Dateien & Secrets (niemals versionieren!)
+compose/.env
+compose/secrets/*.txt
+!compose/secrets/*.txt.example
+zertifikate/ca/*.key
+zertifikate/server/*.key
+zertifikate/**/*.pem
+zertifikate/**/*.crt
+zertifikate/**/*.csr
+zertifikate/**/*.p12
+
+# Laufzeitdaten, Backups & Logs
+logs/*
+!logs/.gitkeep
+backups/*
+!backups/.gitkeep
+*.sql
+*.tar.gz
+*.zip
+.DS_Store
+Thumbs.db
