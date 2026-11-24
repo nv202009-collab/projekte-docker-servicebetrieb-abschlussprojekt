@@ -1,3 +1,7 @@
 #!/bin/sh
 set -eu
-curl -fsS http://localhost:80/wp-admin/install.php >/dev/null 2>&1 || curl -fsS http://localhost:80/ >/dev/null 2>&1
+php -r '
+$ctx = stream_context_create(["http" => ["timeout" => 5, "follow_location" => 1]]);
+$res = @file_get_contents("http://127.0.0.1:80/", false, $ctx);
+exit($res !== false ? 0 : 1);
+'
