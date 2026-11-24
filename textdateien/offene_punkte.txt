@@ -1,0 +1,4 @@
+Offene Punkte / Hinweise vor Abgabe:
+- Nach Abschluss der Pruefung das Test-CA-Zertifikat rheinblick-ca aus dem Windows-Benutzer-Truststore entfernen.
+- Lokale Backups (backups/) und Berichte (skripte/logs/) in .gitignore lassen, damit sie nicht unabsichtlich versioniert werden.
+- Healthcheck von reverse-proxy auf HTTPS/TLS abstimmen und den Status verifizieren.

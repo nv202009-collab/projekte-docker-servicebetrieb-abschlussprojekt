@@ -1,0 +1,5 @@
+id;thema;massnahme;ergebnis
+A01;Port-80-Konflikt;HTTP_PORT=8080 in compose/.env gesetzt;Stack startet ohne Port-Fehler
+A02;Secret-Leserechte;Berechtigungen auf 0644 gesetzt;wp-config.php liest Secret ohne Permission denied
+A03;Namensaufloesung;127.0.0.1 portal.rheinblick.test in Windows hosts;DNS-Aufloesung funktioniert
+A04;TLS & WordPress;Rheinblick Test CA, SAN-Zertifikat und HTTPS aktiviert;HTTPS mit TLSv1.3 und WordPress aktiv

@@ -1,0 +1,4 @@
+name;typ;mount_ziel;zweck;backup_relevant
+db_data;named_volume;/var/lib/mysql;Persistente MariaDB-Daten;ja
+wp_data;named_volume;/var/www/html;WordPress-Dateien und Uploads;ja
+nginx_logs;named_volume;/var/log/nginx;Nginx Access- und Error-Logs;nein

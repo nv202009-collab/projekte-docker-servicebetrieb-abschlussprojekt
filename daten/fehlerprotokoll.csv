@@ -1,0 +1,4 @@
+fehler_id;symptom;ursache;behebung
+F01;Port 80 nicht verfuegbar;Prozess 14884 belegt Port 80 auf dem Host;Ausweichport HTTP_PORT=8080 genutzt
+F02;Permission denied in wp-config.php;Fehlende Leserechte auf Secret-Datei;chmod 644 auf Secret-Dateien angewendet
+F03;Docker-Build scheitert bei RUN nginx -t;Zertifikat ist erst zur Laufzeit per Mount vorhanden;RUN nginx -t aus Dockerfile entfernt

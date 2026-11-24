@@ -1,0 +1,4 @@
+skript;ziel;inhalt;verifikation
+04_backup.sh;backups/db_*.sql;Vollstaendiger MariaDB-Dump ueber Secret;Dateigroesse > 0 und SQL-Statements vorhanden
+04_backup.sh;backups/wp_*.tar.gz;Archiv aus zertifikate/ca und compose/.env;Archivliste pruefbar
+05_restore.sh;database;Ruecksicherung aus SQL-Dump;Tabellen und WordPress-Daten vorhanden

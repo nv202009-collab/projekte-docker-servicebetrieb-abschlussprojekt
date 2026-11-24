@@ -1,0 +1,5 @@
+test_id;pruefgegenstand;methode;ergebnis
+T01;Container-Status;./skripte/03_stack_status.sh;database und portal healthy, HTTPS 200
+T02;HTTP zu HTTPS;Curl- und Browser-Aufruf;TLSv1.3 und HTTP/2 aktiv
+T03;Backup-Lauf;./skripte/04_backup.sh;SQL-Dump und tar.gz erzeugt
+T04;Log-Report;python3 ./skripte/07_log_report.py;Bericht in skripte/logs erstellt

@@ -1,0 +1,4 @@
+dienst;healthcheck_mechanismus;abhaengigkeit;status_nach_test
+database;mariadb-admin ping;keine;healthy
+portal;apache2ctl -t + PHP-Socket Port 80;database (service_healthy);healthy
+reverse-proxy;HTTPS-Endpunkt auf Port 443;portal (service_healthy);healthy_bzw_geprueft
