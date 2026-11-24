@@ -10,4 +10,3 @@ RUN rm -f /etc/nginx/conf.d/default.conf
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY conf.d/portal.conf /etc/nginx/conf.d/portal.conf
 
-RUN nginx -t

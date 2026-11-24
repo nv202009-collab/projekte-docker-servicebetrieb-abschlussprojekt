@@ -12,6 +12,7 @@ services:
       - "127.0.0.1:${HTTPS_PORT}:443"
     volumes:
       - nginx_logs:/var/log/nginx
+      - ../zertifikate/server:/etc/nginx/certs:ro
     networks:
       - frontend_net
     depends_on:
