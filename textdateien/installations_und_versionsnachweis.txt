@@ -1,0 +1,17 @@
+Datum=2026-11-24
+Windows_Version=Windows 10/11 (siehe Systeminfo)
+Systemtyp=x86_64 / amd64
+CPU=4 Kerne (WSL2/Docker-Kontext)
+RAM_MB=8192
+freier_Speicher_GB=947
+Virtualisierung_aktiv=Ja
+WSL_Version=WSL 2
+Ubuntu_Version=Ubuntu 24.04 LTS
+Docker_Desktop_Version=Docker Desktop (WSL2 Backend)
+Docker_Engine_Version=Client 29.9.3 (API 1.56)
+Compose_Version=Docker Compose v5.7.0
+Git_Version=git version 2.53.0
+Python_Version=Python 3.14.4
+OpenSSL_Version=OpenSSL 3.5.5
+Projektpfad=~/projekte/docker-servicebetrieb-abschlussprojekt
+Ergebnis_der_Basispruefung=Erfolgreich (Werkzeuge vorhanden, Docker Engine aktiv, Pflicht-Images geladen)
