@@ -1,4 +1,4 @@
-skript;ziel;inhalt;verifikation
-04_backup.sh;backups/db_*.sql;Vollstaendiger MariaDB-Dump ueber Secret;Dateigroesse > 0 und SQL-Statements vorhanden
-04_backup.sh;backups/wp_*.tar.gz;Archiv aus zertifikate/ca und compose/.env;Archivliste pruefbar
-05_restore.sh;database;Ruecksicherung aus SQL-Dump;Tabellen und WordPress-Daten vorhanden
+Backup_ID,Datenquelle,Methode,Ziel,Intervall,Aufbewahrung,Schutzbedarf,Verschluesselung,Pruefsumme,Verantwortliche_Rolle,Restoreverfahren,Letzter_Test,Testergebnis,RPO,RTO
+B01,MariaDB Datenbank (rheinblick_portal),Logischer SQL-Dump via mariadb-dump --single-transaction,backups/backup_<TS>/rheinblick_portal.sql,Taeglich 02:00 Uhr sowie vor Updates,14 Tage (14 Versionen),Hoch,Ablage in geschuetztem Verzeichnis (700); fuer Export GPG/AES-256 vorgesehen,SHA256SUMS.txt,Junior Systemadministrator,SQL-Import via 04_restore.sh nach Pruefsummen-Check,2026-11-25,Erfolgreich,24 Stunden,30 Minuten
+B02,WordPress Volume (portal_data),Komprimiertes tar.gz Archiv aus Docker Volume,backups/backup_<TS>/portal_data.tar.gz,Taeglich 02:05 Uhr sowie vor Updates,14 Tage (14 Versionen),Mittel,Geschuetzte Ablage; fuer externen Transport Archivverschluesselung,SHA256SUMS.txt,Junior Systemadministrator,Volume-Bereinigung und Entpacken via 04_restore.sh,2026-11-25,Erfolgreich,24 Stunden,30 Minuten
+B03,"Compose-, Nginx- und oeffentliche Zertifikatsdateien",tar.gz Konfigurationssicherung (ohne Klartext-Secrets/Private Keys),backups/backup_<TS>/konfiguration.tar.gz,Bei jeder Konfigurationsaenderung + Git-Commit,30 Tage,Mittel,Keine privaten Schluessel im Backup enthalten,SHA256SUMS.txt,Junior Systemadministrator,Wiederherstellung der Konfigurationsdateien und Compose-Validierung,2026-11-25,Erfolgreich,Bei Aenderung,15 Minuten

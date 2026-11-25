@@ -1,4 +1,12 @@
-Offene Punkte / Hinweise vor Abgabe:
-- Nach Abschluss der Pruefung das Test-CA-Zertifikat rheinblick-ca aus dem Windows-Benutzer-Truststore entfernen.
-- Lokale Backups (backups/) und Berichte (skripte/logs/) in .gitignore lassen, damit sie nicht unabsichtlich versioniert werden.
-- Healthcheck von reverse-proxy auf HTTPS/TLS abstimmen und den Status verifizieren.
+=== OFFENE PUNKTE, EINSCHRAENKUNGEN UND FOLGEARBEITEN ===
+
+1. Lokale Einzelhost-Umgebung (WSL 2 / Docker Desktop):
+   - Der Betrieb erfolgt auf einem lokalen Windows-Arbeitsgeraet ohne Hochverfuegbarkeits-Cluster (kein Swarm/Kubernetes).
+   - Bei einem Neustart des Windows-Hosts muss Docker Desktop aktiv gestartet sein, damit restart: unless-stopped greift.
+
+2. Interne Test-CA & Zertifikatsverwaltung:
+   - Es wird eine selbstsignierte lokale Test-CA verwendet; eine automatisierte Zertifikatserneuerung (z. B. ACME/step-ca) ist noch nicht integriert.
+   - Das CA-Zertifikat muss nach Abschluss der Pruefung aus dem Windows-Zertifikatsspeicher entfernt werden.
+
+3. Backup-Ablage & Verschluesselung:
+   - Backups liegen aktuell lokal unter backups/ und sollten im Produktivbetrieb zusaetzlich verschluesselt auf ein externes Netzlaufwerk oder einen Backup-Server uebertragen werden.
