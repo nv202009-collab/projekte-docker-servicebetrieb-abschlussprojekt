@@ -1,24 +1,17 @@
-# Vertrauliche Dateien & Secrets (niemals versionieren!)
+# Echte Umgebungsvariablen und Secrets niemals versionieren
 compose/.env
 compose/secrets/*.txt
-!compose/secrets/*.txt.example
+!compose/secrets/*.example
+
+# Private Schluessel und CA-Dateien schuetzen
 zertifikate/ca/*.key
 zertifikate/server/*.key
-zertifikate/**/*.pem
-zertifikate/**/*.crt
-zertifikate/**/*.csr
-zertifikate/**/*.p12
+*.pem
+*.p12
 
-# Laufzeitdaten, Backups & Logs
+# Laufzeitdaten, Logs und Backups ausschliessen
 logs/*
-!logs/.gitkeep
 backups/*
-!backups/.gitkeep
 *.sql
 *.tar.gz
-*.zip
-.DS_Store
-Thumbs.db
-zertifikate/
-backups/
-skripte/logs/
+*.tmp
