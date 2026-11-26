@@ -1,4 +1,0 @@
-Regel_ID,Richtung,Protokoll,Port,Quelle,Aktion,Zweck,Test,Ergebnis
-FW01,Eingehend,TCP,80,127.0.0.1,Erlauben,HTTP-Zugriff auf Reverse Proxy und Weiterleitung auf HTTPS,Pruefung lokaler Listener und HTTP-Test,Geplant
-FW02,Eingehend,TCP,443,127.0.0.1,Erlauben,HTTPS-Zugriff auf https://portal.rheinblick.test,Pruefung lokaler Listener und TLS-Test,Geplant
-FW03,Eingehend,TCP,3306,Alle/Extern,Blockieren,Kein veroeffentlichter Host-Port fuer MariaDB,Port- und Netzwerkpruefung,Bestanden (kein Host-Port)

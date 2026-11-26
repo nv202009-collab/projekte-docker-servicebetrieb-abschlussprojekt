@@ -1,6 +1,0 @@
-Komponente,Netzwerk,Quellbereich,Ziel,Host_Port,Container_Port,Protokoll,Veroeffentlicht_Ja_Nein,Zweck,Teststatus
-Windows-Host / Browser,Host-Loopback (127.0.0.1),Windows Client,reverse-proxy,80,80,TCP/HTTP,Ja,Eingehender HTTP-Aufruf mit automatischer Weiterleitung auf HTTPS,Geplant
-Windows-Host / Browser,Host-Loopback (127.0.0.1),Windows Client,reverse-proxy,443,443,TCP/HTTPS,Ja,Verschluesselter Zugriff auf https://portal.rheinblick.test,Geplant
-reverse-proxy,frontend_net (Bridge),reverse-proxy,portal,-,80,TCP/HTTP,Nein,Interne Weiterleitung der Portal-Anfragen an WordPress,Geplant
-portal,backend_net (Bridge internal),portal,database,-,3306,TCP/MySQL,Nein,Interne Datenbankverbindung von WordPress zu MariaDB,Geplant
-database,backend_net (Bridge internal),Windows Client / reverse-proxy,database,-,3306,TCP/MySQL,Nein,Negativtest: Direkter Zugriff von aussen und vom Proxy ist blockiert,Geplant

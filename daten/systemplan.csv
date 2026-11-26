@@ -1,7 +1,0 @@
-System_oder_Komponente,Rolle,Betriebssystem_oder_Image,Version_oder_Tag,CPU,RAM_MB,Speicher_GB,Verantwortliche_Funktion,Status,Bemerkung
-Windows-Host,Physisches Arbeitsgeraet und Browser-Client,Windows 10/11 64-Bit,23H2/24H2,4 Kerne,16384,50,Plattform-Basis und Client-Test,Geplant,Aktivierte Hardwarevirtualisierung und hosts-Eintrag 127.0.0.1 portal.rheinblick.test
-WSL2-Ubuntu,Linux-Arbeitsumgebung und Skript-Host,Ubuntu LTS,24.04 LTS,4 Kerne (shared),8192,30,Projektordner Git OpenSSL und Bash/Python Skripte,Geplant,Ablage unter ~/projekte/docker-servicebetrieb-abschlussprojekt
-Docker-Desktop,Container-Laufzeitumgebung und Compose-Engine,Docker Desktop (WSL2 Backend),Aktuelle stabile Version,4 Kerne (shared),8192,30,Container-Orchestrierung Netzwerke und Volumes,Geplant,WSL-Integration fuer Ubuntu 24.04 aktiviert
-reverse-proxy,Eingangspunkt TLS-Terminierung und Weiterleitung,rheinblick/nginx-proxy (Basis nginx:1.30.3-alpine),1.0,0.50,256,1,HTTPS-Terminierung HTTP-Redirect und Reverse Proxy,Geplant,Eigenes Dockerfile veroeffentlicht nur Host-Ports 80 und 443
-portal,Internes Unternehmensportal (Webanwendung),wordpress,6.9.4-php8.3-apache,1.00,1024,5,Bereitstellung der Weboberflaeche und Inhalte,Geplant,Verbunden mit Frontend- und Backend-Netzwerk kein Host-Port
-database,Relationale Datenbank fuer Portaldaten,mariadb,11.4.12,1.00,1024,5,Persistente Datenhaltung rheinblick_portal,Geplant,Nur im Backend-Netzwerk kein Host-Port Zugriff via Secret-Files
