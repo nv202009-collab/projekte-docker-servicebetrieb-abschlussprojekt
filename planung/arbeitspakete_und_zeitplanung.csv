@@ -1,0 +1,19 @@
+Arbeitspaket_ID,Arbeitspaket,Abhaengigkeit,Geplanter_Beginn,Geplantes_Ende,Geplanter_Aufwand,Tatsaechlicher_Aufwand,Status,Ergebnis,Abweichung_und_Begruendung
+AP00,Zeitplanung und Projektstruktur anlegen,-,Tag 01,Tag 01,4h,4h,Abgeschlossen,Ordnerstruktur und zeitplanung.csv erstellt,Keine Abweichung
+AP01,Ausgangssituation Architektur und Risiken (Meilenstein 1: Arbeitsgerät & Konzept),AP00,Tag 01,Tag 02,12h,13h,In Bearbeitung,00_projektuebersicht.docx 01_ausgangssituation_und_architektur.docx systemplan.csv port_und_netzwerkplan.csv,Planaenderung 1 (+1h): Erweiterung der Risikoanalyse um 10 konkrete Szenarien und Rueckfallpfade
+AP02,Eigenes Arbeitsgeraet WSL 2 Docker Desktop und lokale Sicherheit,AP01,Tag 02,Tag 03,8h,8h,Geplant,02_arbeitsgeraet_und_docker_desktop.docx installations_und_versionsnachweis.txt firewall_regeln.txt,Keine Abweichung
+AP03,Docker Desktop Engine und Compose Plugin (Meilenstein 2: Docker Desktop funktionsfaehig),AP02,Tag 03,Tag 04,8h,8h,Geplant,docker_systeminfo.txt und Basis-Images gepullt,Keine Abweichung
+AP04,Git und Konfigurationsverwaltung,AP01,Tag 04,Tag 04,6h,6h,Geplant,Lokales Git Repo .gitignore und .example-Vorlagen erstellt,Keine Abweichung
+AP05,Servicekatalog und Docker Compose Grundgeruest (Meilenstein 3: Erster Stack Start),AP03;AP04,Tag 05,Tag 06,12h,12h,Geplant,servicekatalog.csv docker-compose.yml compose_validierung.txt,Keine Abweichung
+AP06,Eigenes Nginx Image und Reverse Proxy Grundlage,AP05,Tag 06,Tag 07,10h,10h,Geplant,Dockerfile nginx.conf portal.conf und eigenes Image rheinblick/nginx-proxy:1.0,Keine Abweichung
+AP07,Docker Netzwerke und Porttrennung,AP06,Tag 07,Tag 08,8h,8h,Geplant,Frontend- und Backend-Netzwerk isoliert und Negativtests bestanden,Keine Abweichung
+AP08,Volumes Persistenz und Dateirechte (Meilenstein 4: Persistenztest),AP07,Tag 08,Tag 09,10h,11h,Geplant,volumeplan.csv und Persistenznachweis nach Neustart/down,Planaenderung 2 (+1h): Zusaetzlicher Testfall fuer Berechtigungsfehler im Volume eingeplant
+AP09,Variablen Secrets und sichere Konfiguration,AP08,Tag 09,Tag 10,8h,8h,Geplant,variablen_und_secrets_plan.csv und Compose Secrets aktiv,Keine Abweichung
+AP10,Interne Zertifizierungsstelle und HTTPS (Meilenstein 5: HTTPS aktiv),AP07;AP09,Tag 10,Tag 12,14h,16h,Geplant,05_reverse_proxy_und_tls.docx tls_zertifikatsplan.csv tls_pruefung.txt,Planaenderung 3 (+2h): Mehr Puffer fuer SAN-Zertifikatserstellung und Windows-Truststore-Pruefung
+AP11,Healthchecks Neustartverhalten und Ressourcenlimits,AP09,Tag 12,Tag 13,8h,8h,Geplant,healthcheck_und_limits.csv und eigene Healthcheck-Skripte,Keine Abweichung
+AP12,Logs Systemzustand und Betriebsbefehle,AP11,Tag 13,Tag 14,10h,10h,Geplant,betriebsbefehle.txt 05_health_report.sh 07_log_report.py,Keine Abweichung
+AP13,Backup und praktische Wiederherstellung (Meilenstein 6: Restore erfolgreich),AP08;AP12,Tag 14,Tag 15,12h,12h,Geplant,backup_plan.csv 03_backup.sh 04_restore.sh und Restore-Nachweis,Keine Abweichung
+AP14,Kontrolliertes Update und Rollback,AP13,Tag 15,Tag 16,8h,8h,Geplant,06_update_rollback.sh update_rollback_nachweis.txt Image 1.1 -> Rollback 1.0,Keine Abweichung
+AP15,Start Stop und Betriebsautomatisierung,AP12,Tag 16,Tag 17,8h,8h,Geplant,01_stack_start.sh 02_stack_stop.sh 08_automatisierung.docx,Keine Abweichung
+AP16,Administrationsfaelle Tests und kontrollierte Fehleranalyse,AP14;AP15,Tag 17,Tag 18,12h,12h,Geplant,adminfaelle.csv (15) testprotokoll.csv (25) fehlerprotokoll.csv (8),Keine Abweichung
+AP17,Abschlussdokumentation Uebergabe und Praesentation (Meilenstein 7: Abnahme),AP16,Tag 19,Tag 20,16h,16h,Geplant,00-10 .docx offene_punkte.txt abschlussprojekt_docker_servicebetrieb.pptx,Keine Abweichung

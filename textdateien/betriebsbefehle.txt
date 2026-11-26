@@ -1,0 +1,31 @@
+=== WICHTIGE BETRIEBSBEFEHLE RHEINBLICK UNTERNEHMENSPORTAL ===
+
+# Stack starten (inkl. Vorpruefung & HTTPS-Check)
+./skripte/01_stack_start.sh
+
+# Stack geordnet stoppen (ohne Datenverlust)
+./skripte/02_stack_stop.sh
+
+# Compose-Konfiguration validieren
+docker compose --env-file compose/.env -f compose/docker-compose.yml config
+
+# Container-, Health- und Ressourcenstatus pruefen
+./skripte/05_health_report.sh
+docker compose --env-file compose/.env -f compose/docker-compose.yml ps
+
+# Logs einsehen und mit Python auswerten
+docker compose --env-file compose/.env -f compose/docker-compose.yml logs --tail=100
+python3 skripte/07_log_report.py
+
+# Netzwerke, Volumes und Images pruefen
+docker network ls
+docker volume ls
+docker images
+
+# Backup und kontrollierter Restore
+./skripte/03_backup.sh
+./skripte/04_restore.sh backups/<BACKUP_ORDNER>
+
+# Update und Rollback
+./skripte/06_update_rollback.sh check
+./skripte/06_update_rollback.sh rollback 1.0

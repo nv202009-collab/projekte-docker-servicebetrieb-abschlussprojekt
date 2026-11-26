@@ -1,0 +1,4 @@
+Service,Healthcheck_Befehl,Interval,Timeout,Retries,Start_Period,Restart_Policy,CPU_Limit,RAM_Limit_MB,Erwartetes_Fehlerverhalten,Test_ID,Ergebnis
+reverse-proxy,wget -q --spider --no-check-certificate https://127.0.0.1:443/ || exit 1,30s,5s,3,15s,unless-stopped,0.50,256,Nach 3 Fehlversuchen Status unhealthy; automatischer Neustart bei Prozessabbruch,T18,Bestanden
+portal,/usr/local/bin/portal_healthcheck.sh,30s,10s,5,45s,unless-stopped,1.00,1024,Reverse Proxy startet erst bei healthy; bei Ausfall 502 Bad Gateway mit eigener Fehlerseite,T19,Bestanden
+database,/usr/local/bin/database_healthcheck.sh,20s,5s,5,30s,unless-stopped,1.00,1024,Portal wartet auf healthy DB; bei DB-Stop meldet Portal Datenbankfehler,T20,Bestanden

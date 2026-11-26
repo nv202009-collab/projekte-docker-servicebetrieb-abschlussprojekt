@@ -1,0 +1,11 @@
+]633;E;echo "Datum: $(date '+%Y-%m-%d %H:%M')";bbecd4e3-29aa-48ab-a8b4-ce3c57cb444b]633;CDatum: 2026-11-26 12:31
+WSL_Ubuntu_Version: Ubuntu 26.04.1 LTS
+CPU_Kerne: 8
+RAM_Gesamt: 7.6Gi
+Freier_Speicher_WSL: 947G
+Docker_Engine_Version: Docker version 29.9.3, build 5457199
+Compose_Version: Docker Compose version v5.7.0
+Git_Version: git version 2.53.0
+Python_Version: Python 3.14.4
+OpenSSL_Version: OpenSSL 3.5.5 27 Jan 2026 (Library: OpenSSL 3.5.5 27 Jan 2026)
+Projektpfad: /home/natalija/projekte/docker-servicebetrieb-abschlussprojekt

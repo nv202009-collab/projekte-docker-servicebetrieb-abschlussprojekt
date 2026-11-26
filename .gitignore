@@ -1,0 +1,17 @@
+# Echte Umgebungsvariablen und Secrets niemals versionieren
+compose/.env
+compose/secrets/*.txt
+!compose/secrets/*.example
+
+# Private Schluessel und CA-Dateien schuetzen
+zertifikate/ca/*.key
+zertifikate/server/*.key
+*.pem
+*.p12
+
+# Laufzeitdaten, Logs und Backups ausschliessen
+logs/*
+backups/*
+*.sql
+*.tar.gz
+*.tmp

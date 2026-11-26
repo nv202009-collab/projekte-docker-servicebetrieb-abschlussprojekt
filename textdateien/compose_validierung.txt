@@ -1,0 +1,171 @@
+name: rheinblick-portal
+services:
+  database:
+    deploy:
+      resources:
+        limits:
+          cpus: 1
+          memory: "1073741824"
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: rheinblick_portal
+      MARIADB_PASSWORD_FILE: /run/secrets/db_user_password
+      MARIADB_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+      MARIADB_USER: portaluser
+    image: mariadb:11.4.12
+    labels:
+      de.rheinblick.component: database
+      de.rheinblick.owner: it-betrieb
+      de.rheinblick.project: unternehmensportal
+    logging:
+      driver: json-file
+      options:
+        max-file: "3"
+        max-size: 10m
+    networks:
+      backend_net: null
+    secrets:
+      - source: db_root_password
+        target: /run/secrets/db_root_password
+      - source: db_user_password
+        target: /run/secrets/db_user_password
+    volumes:
+      - type: volume
+        source: db_data
+        target: /var/lib/mysql
+        volume: {}
+      - type: bind
+        source: /home/natalija/projekte/docker-servicebetrieb-abschlussprojekt/compose/healthchecks/database_healthcheck.sh
+        target: /usr/local/bin/database_healthcheck.sh
+        read_only: true
+        bind: {}
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - /usr/local/bin/database_healthcheck.sh
+      timeout: 5s
+      interval: 20s
+      retries: 5
+      start_period: 30s
+  portal:
+    deploy:
+      resources:
+        limits:
+          cpus: 1
+          memory: "1073741824"
+    restart: unless-stopped
+    environment:
+      WORDPRESS_DB_HOST: database:3306
+      WORDPRESS_DB_NAME: rheinblick_portal
+      WORDPRESS_DB_PASSWORD_FILE: /run/secrets/db_user_password
+      WORDPRESS_DB_USER: portaluser
+    image: wordpress:6.9.4-php8.3-apache
+    labels:
+      de.rheinblick.component: portal
+      de.rheinblick.owner: it-betrieb
+      de.rheinblick.project: unternehmensportal
+    logging:
+      driver: json-file
+      options:
+        max-file: "3"
+        max-size: 10m
+    networks:
+      backend_net: null
+      frontend_net: null
+    secrets:
+      - source: db_user_password
+        target: /run/secrets/db_user_password
+    volumes:
+      - type: volume
+        source: portal_data
+        target: /var/www/html
+        volume: {}
+      - type: bind
+        source: /home/natalija/projekte/docker-servicebetrieb-abschlussprojekt/compose/healthchecks/portal_healthcheck.sh
+        target: /usr/local/bin/portal_healthcheck.sh
+        read_only: true
+        bind: {}
+    depends_on:
+      database:
+        condition: service_healthy
+        required: true
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - /usr/local/bin/portal_healthcheck.sh
+      timeout: 10s
+      interval: 30s
+      retries: 5
+      start_period: 45s
+  reverse-proxy:
+    deploy:
+      resources:
+        limits:
+          cpus: 0.5
+          memory: "268435456"
+    restart: unless-stopped
+    image: rheinblick/nginx-proxy:1.0
+    labels:
+      de.rheinblick.component: reverse-proxy
+      de.rheinblick.owner: it-betrieb
+      de.rheinblick.project: unternehmensportal
+    logging:
+      driver: json-file
+      options:
+        max-file: "3"
+        max-size: 10m
+    networks:
+      frontend_net: null
+    volumes:
+      - type: volume
+        source: nginx_logs
+        target: /var/log/nginx
+        volume: {}
+    build:
+      context: /home/natalija/projekte/docker-servicebetrieb-abschlussprojekt/compose/nginx
+      dockerfile: Dockerfile
+    depends_on:
+      portal:
+        condition: service_healthy
+        required: true
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -q --spider http://127.0.0.1:80/ || exit 1
+      timeout: 5s
+      interval: 30s
+      retries: 3
+      start_period: 15s
+    ports:
+      - mode: ingress
+        host_ip: 127.0.0.1
+        target: 80
+        published: "80"
+        protocol: tcp
+      - mode: ingress
+        host_ip: 127.0.0.1
+        target: 443
+        published: "443"
+        protocol: tcp
+networks:
+  backend_net:
+    name: rheinblick-portal_backend_net
+    driver: bridge
+    internal: true
+  frontend_net:
+    name: rheinblick-portal_frontend_net
+    driver: bridge
+volumes:
+  db_data:
+    name: rheinblick-portal_db_data
+  nginx_logs:
+    name: rheinblick-portal_nginx_logs
+  portal_data:
+    name: rheinblick-portal_portal_data
+secrets:
+  db_root_password:
+    name: rheinblick-portal_db_root_password
+    file: /home/natalija/projekte/docker-servicebetrieb-abschlussprojekt/compose/secrets/db_root_password.txt
+  db_user_password:
+    name: rheinblick-portal_db_user_password
+    file: /home/natalija/projekte/docker-servicebetrieb-abschlussprojekt/compose/secrets/db_user_password.txt

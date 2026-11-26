@@ -1,0 +1,88 @@
+=== AP10 TLS-Pruefung portal.rheinblick.test ===
+2026-11-26T18:19:25+01:00
+
+--- Zertifikat ---
+serial=15088AB24EC5EF7711CFA90AC618CF7855B992BC
+notBefore=Nov 24 16:49:23 2026 GMT
+notAfter=Nov 24 16:49:23 2027 GMT
+subject=C=DE, ST=Baden-Wuerttemberg, O=Rheinblick Services GmbH, CN=portal.rheinblick.test
+X509v3 Subject Alternative Name: 
+    DNS:portal.rheinblick.test
+sha256 Fingerprint=EC:41:D3:70:2C:A8:31:A1:27:F2:50:15:E3:A1:DA:B8:6F:9F:22:13:B3:3F:9C:2D:CB:6A:30:E9:D3:AC:20:48
+
+--- HTTPS Header ---
+  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+                                 Dload  Upload  Total   Spent   Left   Speed
+  0      0   0      0   0      0      0      0                              0* Host portal.rheinblick.test:443 was resolved.
+* IPv6: (none)
+* IPv4: 127.0.0.1
+*   Trying 127.0.0.1:443...
+* ALPN: curl offers h2,http/1.1
+} [5 bytes data]
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+} [1577 bytes data]
+* SSL Trust: peer verification disabled
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+{ [1210 bytes data]
+* TLSv1.3 (IN), TLS change cipher, Change cipher spec (1):
+{ [1 bytes data]
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+{ [19 bytes data]
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+{ [1244 bytes data]
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+{ [264 bytes data]
+* TLSv1.3 (IN), TLS handshake, Finished (20):
+{ [52 bytes data]
+* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+} [1 bytes data]
+* TLSv1.3 (OUT), TLS handshake, Finished (20):
+} [52 bytes data]
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384 / X25519MLKEM768 / RSASSA-PSS
+* ALPN: server accepted h2
+* Server certificate:
+*   subject: C=DE; ST=Baden-Wuerttemberg; O=Rheinblick Services GmbH; CN=portal.rheinblick.test
+*   start date: Nov 24 16:49:23 2026 GMT
+*   expire date: Nov 24 16:49:23 2027 GMT
+*   issuer: C=DE; ST=Baden-Wuerttemberg; O=Rheinblick Services GmbH; CN=Rheinblick Test CA
+*   Certificate level 0: Public key type RSA (2048/112 Bits/secBits), signed using sha256WithRSAEncryption
+*  SSL certificate verification failed, continuing anyway!
+* Established connection to portal.rheinblick.test (127.0.0.1 port 443) from 127.0.0.1 port 47372 
+* using HTTP/2
+* [HTTP/2] [1] OPENED stream for https://portal.rheinblick.test/
+* [HTTP/2] [1] [:method: HEAD]
+* [HTTP/2] [1] [:scheme: https]
+* [HTTP/2] [1] [:authority: portal.rheinblick.test]
+* [HTTP/2] [1] [:path: /]
+* [HTTP/2] [1] [user-agent: curl/8.18.0]
+* [HTTP/2] [1] [accept: */*]
+} [5 bytes data]
+> HEAD / HTTP/2
+> Host: portal.rheinblick.test
+> User-Agent: curl/8.18.0
+> Accept: */*
+> 
+* Request completely sent off
+} [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+{ [281 bytes data]
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+{ [281 bytes data]
+< HTTP/2 200 
+< server: nginx
+< date: Tue, 24 Nov 2026 17:19:25 GMT
+< content-type: text/html; charset=UTF-8
+< x-powered-by: PHP/8.3.31
+< link: <https://portal.rheinblick.test/index.php?rest_route=/>; rel="https://api.w.org/"
+< 
+{ [0 bytes data]
+  0      0   0      0   0      0      0      0                              0  0      0   0      0   0      0      0      0                              0  0      0   0      0   0      0      0      0                              0
+* Connection #0 to host portal.rheinblick.test:443 left intact
+HTTP/2 200 
+server: nginx
+date: Tue, 24 Nov 2026 17:19:25 GMT
+content-type: text/html; charset=UTF-8
+x-powered-by: PHP/8.3.31
+link: <https://portal.rheinblick.test/index.php?rest_route=/>; rel="https://api.w.org/"
+
