@@ -5,40 +5,40 @@
 # Voraussetzungen: Laufender database-Container, mindestens 500 MB freier Speicher
 # Beispielaufruf: ./skripte/03_backup.sh
 
-set -euo pipefail # Skript bricht bei Fehlern ab, keine uninitialisierten Variablen, Fehler in Pipes werden erkannt
+set -euo pipefail
 
-PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)" # Absoluter Pfad zum Projektverzeichnis
-COMPOSE_FILE="$PROJECT_DIR/compose/docker-compose.yml" # Absoluter Pfad zur Docker-Compose-Datei
-ENV_FILE="$PROJECT_DIR/compose/.env" # Absoluter Pfad zur .env-Datei
-TS="$(date '+%Y%m%d_%H%M%S')" # Zeitstempel fuer das Backup-Verzeichnis
-BACKUP_DIR="$PROJECT_DIR/backups/backup_$TS" # Absoluter Pfad zum Backup-Verzeichnis mit Zeitstempel
-LOG_FILE="$PROJECT_DIR/logs/03_backup.log" # Absoluter Pfad zur Log-Datei
+PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+COMPOSE_FILE="$PROJECT_DIR/compose/docker-compose.yml"
+ENV_FILE="$PROJECT_DIR/compose/.env"
+TS="$(date '+%Y%m%d_%H%M%S')"
+BACKUP_DIR="$PROJECT_DIR/backups/backup_$TS"
+LOG_FILE="$PROJECT_DIR/logs/03_backup.log"
 
-if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then # Hilfetext anzeigen
-  echo "Verwendung: $0 [--help]" # Informationen zur Verwendung des Skripts
-  echo "Erstellt ein vollstaendiges Backup mit Zeitstempel und SHA256-Pruefsumme unter backups/." # Beschreibung des Backup-Prozesses
-  exit 0 # Skript beenden
-fi # If-Abfrage Ende
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+  echo "Verwendung: $0 [--help]"
+  echo "Erstellt ein vollstaendiges Backup mit Zeitstempel und SHA256-Pruefsumme unter backups/."
+  exit 0
+fi
 
-mkdir -p "$BACKUP_DIR" "$PROJECT_DIR/logs" # Log- und Backup-Verzeichnisse erstellen, falls sie nicht existieren
-log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" | tee -a "$LOG_FILE"; } # Log-Funktion, die Zeitstempel hinzufügt und sowohl in die Log-Datei als auch auf die Konsole schreibt
+mkdir -p "$BACKUP_DIR" "$PROJECT_DIR/logs"
+log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" | tee -a "$LOG_FILE"; }
 
-FREE_KB=$(df -k "$PROJECT_DIR/backups" | awk 'NR==2 {print $4}') # Freien Speicherplatz in KB im Backup-Verzeichnis ermitteln
-if [[ "$FREE_KB" -lt 512000 ]]; then # Weniger als 500 MB freier Speicherplatz
-  log "FEHLER: Weniger als 500 MB freier Speicher verfuegbar." # Fehlermeldung ausgeben
-  exit 1 # Skript mit Fehlercode 1 beenden
-fi # If-Abfrage Ende
+FREE_KB=$(df -k "$PROJECT_DIR/backups" | awk 'NR==2 {print $4}')
+if [[ "$FREE_KB" -lt 512000 ]]; then
+  log "FEHLER: Weniger als 500 MB freier Speicher verfuegbar."
+  exit 1
+fi
 
-log "Starte Backup in $BACKUP_DIR..." # Log-Nachricht ausgeben, dass das Backup gestartet wird
+log "Starte Backup in $BACKUP_DIR..."
 
 # 1. Konsistenter MariaDB-Dump (Kennwort wird sicher im Container aus Docker Secret gelesen)
-docker compose --env-file "$ENV_FILE" -f "$COMPOSE_FILE" exec -T database \  #Fuehrt den Befehl im laufenden Datenbank-Container ohne TTY aus
-  sh -c 'mariadb-dump -u root -p"$(cat /run/secrets/db_root_password)" --single-transaction --databases "$MARIADB_DATABASE"' \   #Liest das Root-Kennwort sicher aus dem Docker Secret (kein Klartext im Skript)
-  > "$BACKUP_DIR/rheinblick_portal.sql"  
+docker compose --env-file "$ENV_FILE" -f "$COMPOSE_FILE" exec -T database \
+  sh -c 'mariadb-dump -u root -p"$(cat /run/secrets/db_root_password)" --single-transaction --databases "$MARIADB_DATABASE"' \
+  > "$BACKUP_DIR/rheinblick_portal.sql"
 log "Datenbank-Dump erfolgreich erstellt."
 
 # 2. Persistentes WordPress-Volume (portal_data) sichern
-docker run --rm \  # 
+docker run --rm \
   -v rheinblick-portal_portal_data:/source:ro \
   -v "$BACKUP_DIR":/backup \
   alpine:3.20 tar -czf /backup/portal_data.tar.gz -C /source .
